@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+    font-family: Arial;
+}
+.board{
+    margin: 40px auto;
+    width: 411px;
+    height: 410px;
+    border-bottom: 1px #ccc solid;
+    border-left: 1px #ccc solid;
+}
+.board li{
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    list-style: none;
+    border-top: 1px #ccc solid;
+    border-right: 1px #ccc solid;
+}
+.board li.selected {
+    color: #fff;
+    background: #ae1212;
+}
+.controls{
+    margin: 0 auto;
+    width: 400px;
+}
+.controls li{
+    list-style: none;
+}
+.dice{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: #ae1212;
+}
+.dots li{
+    display: none;
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background: #fff;
+}
+/* center dot */
+.one .dots .one,
+.three .dots .three,
+.five .dots .three{
+    display: block;
+    top: 17px;
+    left: 17px;
+}
+/* top right */
+.two .dots .one,
+.three .dots .one,
+.four .dots .one,
+.five .dots .one,
+.six .dots .one{
+    display: block;
+    top: 8px;
+    left: 27px;
+}
+/* bottom left*/
+.two .dots .two,
+.three .dots .two,
+.four .dots .two,
+.five .dots .two,
+.six .dots .two{
+    display: block;
+    top: 27px;
+    left: 8px;
+}
+/* top left */
+.four .dots .three,
+.five .dots .four,
+.six .dots .three{
+    display: block;
+    top: 8px;
+    left: 8px;
+}
+/* bottom right */
+.four .dots .four,
+.five .dots .five,
+.six .dots .four{
+    display: block;
+    top: 27px;
+    left: 27px;
+}
+/* middle left */
+.six .dots .five{
+    display: block;
+    left: 8px;
+    top: 17px;
+}
+/* middle right */
+.six .dots .six{
+    display: block;
+    left: 27px;
+    top: 17px;
+}
