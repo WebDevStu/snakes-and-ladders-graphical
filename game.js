@@ -10,6 +10,8 @@
     };
 
 
+
+
     _.listenTo('click:mouse', function () {
 
         //if (game.started) {
