@@ -1,6 +1,15 @@
 
 var _ = {
 
+
+    /**
+     * extend
+     * extend props from one object into another
+     *
+     * @param object {Object}
+     * @param extend {Object}
+     * @returns {Object}
+     */
     extend: function (object, extend) {
 
         for (var prop in extend) {
@@ -13,15 +22,31 @@ var _ = {
     },
 
 
-
+    /**
+     * toArray
+     * converts array-like objects into arrays
+     * @param array
+     * @returns {Array}
+     */
     toArray: function (array) {
         return Array.prototype.slice.call(array);
     },
 
 
-    events: [],
+    /**
+     * events placeholder object
+     */
+    events: {},
 
 
+    /**
+     * listenTo
+     * registers callbacks to be fired when the same identifier is triggered
+     *
+     * @param id {String}
+     * @param callback {Function}
+     * @param scope {Object}
+     */
     listenTo: function (id, callback, scope) {
 
         _.events[id] = _.events[id] || [];
@@ -34,6 +59,10 @@ var _ = {
     },
 
 
+    /**
+     * trigger
+     * triggers registered callback in scope if supplied
+     */
     trigger: function () {
 
         var args = _.toArray(arguments),
@@ -41,12 +70,21 @@ var _ = {
 
         if (_.events[id] && _.events[id].length) {
             _.events[id].forEach(function (callback) {
-                callback.call(callback.scope || this, args);
+                callback.apply(callback.scope || this, args);
             }, this);
         }
     },
 
 
+    /**
+     * repeat
+     * wrapper method for interval to keep callbacks in scope
+     *
+     * @param callback {Function}
+     * @param scope {Object}
+     * @param time {Number}
+     * @returns {number}
+     */
     repeat: function (callback, scope, time) {
 
         return setInterval(function () {
@@ -55,15 +93,22 @@ var _ = {
     },
 
 
-    addClass: function (el, classes) {
-        el.className = el.className + classes;
+    /**
+     * addClass
+     * simple helper to add class to dom object
+     *
+     * @param el {Object}
+     * @param className {String}
+     */
+    addClass: function (el, className) {
+
+        if (el) {
+            el.className = el.className + ' ' + className;
+        }
     },
 
-    removeClass: function (el, classes) {
 
-    }
-
-
+    removeClass: function (el, className) {}
 };
 
 

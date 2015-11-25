@@ -1,4 +1,8 @@
-
+/**
+ * DiceClass
+ * main dice class
+ * @constructor
+ */
 var DiceClass = function () {
 
     this.el = document.getElementById('dice');
@@ -34,18 +38,24 @@ _.extend(DiceClass.prototype, {
         }, false);
     },
 
+
     /**
      * throw
      * @returns {number}
      */
     throw: function () {
-        return Math.ceil(Math.random() * 6);
+
+        var thrown = Math.ceil(Math.random() * 6);
+
+        this.update(thrown);
+
+        return thrown;
     },
 
 
     /**
      * update
-     *
+     * updates the DOM (the dice part) with the className of the number thrown
      * @param n {Number}
      */
     update: function (n) {

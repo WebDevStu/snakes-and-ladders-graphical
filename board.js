@@ -1,4 +1,9 @@
-
+/**
+ * BoardClass
+ * main class for the board
+ *
+ * @constructor
+ */
 var BoardClass = function () {
 
     this.el = document.getElementById('board');
@@ -12,6 +17,8 @@ var BoardClass = function () {
     this.ladders = this.randomCoordinates();
 
     this.create();
+
+    _.listenTo('move:complete', this.updatePosition, this);
 };
 
 
@@ -20,6 +27,8 @@ _.extend(BoardClass.prototype, {
 
     /**
      * generateBoard
+     * generates an array of numbers formatted to make the travel of play left
+     * to right to left...
      */
     generateBoard: function () {
 
@@ -92,6 +101,7 @@ _.extend(BoardClass.prototype, {
 
     /**
      * random
+     * creates a random number within a given range
      *
      * @param limit {number}
      * @returns {number}
@@ -103,7 +113,7 @@ _.extend(BoardClass.prototype, {
 
     /**
      * create
-     * creates the board
+     * creates the board and all necessary elements
      */
     create: function () {
 
@@ -128,51 +138,69 @@ _.extend(BoardClass.prototype, {
 
 
 
-    getSpaceByNumber: function (number) {
+    getSpaceByNumber: function (number) {},
 
 
-
-    },
-
-
-
+    /**
+     * move
+     * sets of an interval to update the board of where the player is
+     *
+     * @param moves {number}
+     */
     move: function (moves) {
 
-        this.interval = _.repeat(this.changeSpace(moves, function () {
-            console.log('complete');
-        }), this, 2000);
+        var interval = _.repeat(this.changeSpace(moves + 1, function () {
 
+            clearInterval(interval);
 
+            _.trigger('move:complete', moves);
 
+        }), this, 500);
 
     },
 
 
-
+    /**
+     * changeSpace
+     * closure called from the interval for moving the space
+     *
+     * @param moves {Number}
+     * @param callback {Function}
+     * @returns {Function}
+     */
     changeSpace: function (moves, callback) {
 
         var scope = this,
-            interval = this.interval,
-            position = this.position,
-            selected = this.el.querySelector('.selected'),
-            moved = 0;
+            moved = 0,
+            selected,
+            next;
 
         return function () {
 
             moved += 1;
 
             if (moved >= moves) {
-                clearInterval(interval);
-
-                callback();
-                return;
+                return callback();
             }
 
-            selected.className = selected.className.replace(/( )?selected/g, '');
-            scope.el.querySelector('.space-' + scope.position);
+            selected = scope.el.querySelector('.selected');
+            next = scope.el.querySelector('.space-' + (scope.position + moved));
 
+            if (selected) {
+                selected.className = selected.className.replace(/( )?selected/g, '');
+            }
 
-
+            _.addClass(next, 'selected');
         }
+    },
+
+
+    /**
+     * updatePosition
+     * callback from listener updates once the move has been completed
+     * @param moves
+     */
+    updatePosition: function (moves) {
+        this.position += moves;
     }
 });
