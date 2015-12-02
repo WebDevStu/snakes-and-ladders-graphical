@@ -16,6 +16,7 @@ var BoardClass = function () {
     this.snakes = this.randomCoordinates();
     this.ladders = this.randomCoordinates();
 
+    console.log(this.snakes, this.ladders);
     this.create();
 
     _.listenTo('move:complete', this.updatePosition, this);
