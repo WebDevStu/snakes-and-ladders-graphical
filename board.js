@@ -88,7 +88,7 @@ _.extend(BoardClass.prototype, {
             this.used.push(first);
             second = this.random(first);
 
-            while (this.used.indexOf(second) !== -1 || second > (first + 10) || second < (first - 10)) {
+            while (this.used.indexOf(second) !== -1 || second > (first + 30) || second < (first - 40)) {
                 second = this.random(first);
             }
 

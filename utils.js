@@ -55,7 +55,7 @@ var _ = {
 
             for (prop in id) {
                 if (id.hasOwnProperty(prop)) {
-                    _.events[prop] = _.events[prop] || []
+                    _.events[prop] = _.events[prop] || [];
                     id[prop].scope = callback || null;
 
                     _.events[prop].push(id[prop]);

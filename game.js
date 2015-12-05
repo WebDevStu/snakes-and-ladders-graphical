@@ -23,7 +23,7 @@
         'move:complete': function () {
             game.moving = false;
         }
-    })
+    }, false, false);
 } ());
 
 
