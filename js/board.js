@@ -12,19 +12,15 @@ var BoardClass = function () {
 
     this.position = 0;
 
-    this.spaces = this.generateBoard();
-    this.snakes = this.randomCoordinates();
+    this.spaces  = this.generateBoard();
+    this.snakes  = this.randomCoordinates();
     this.ladders = this.randomCoordinates();
-
-    console.log(this.snakes, this.ladders);
-    this.create();
 
     _.listenTo('move:complete', this.updatePosition, this);
 };
 
 
 _.extend(BoardClass.prototype, {
-
 
     /**
      * generateBoard
@@ -136,8 +132,7 @@ _.extend(BoardClass.prototype, {
 
         this.el.appendChild(list);
     },
-
-
+    
 
     getSpaceByNumber: function (number) {},
 
@@ -192,7 +187,7 @@ _.extend(BoardClass.prototype, {
             }
 
             _.addClass(next, 'selected');
-        }
+        };
     },
 
 

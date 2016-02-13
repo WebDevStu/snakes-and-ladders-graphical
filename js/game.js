@@ -9,9 +9,15 @@
         board:  new BoardClass()
     };
 
+    game.board.create();
 
     _.listenTo({
 
+        /**
+         * mouse click event callback
+         *
+         * @method
+         */
         'click:mouse': function () {
 
             if (!game.moving) {
@@ -20,9 +26,16 @@
             }
         },
 
+
+        /**
+         * complete move event callback
+         *
+         * @method
+         */
         'move:complete': function () {
             game.moving = false;
         }
+        
     }, false, false);
 } ());
 
